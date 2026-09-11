@@ -537,17 +537,6 @@ img, svg, canvas, video {
   color: #94a3b8;
 }
 
-.header-mock-ribbon {
-  background: rgba(41, 36, 106, 0.7);
-  padding: 5px 28px;
-  font-size: 0.72rem;
-  color: #94a3b8;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
 /* ==========================================================================
    TAB CONTEXT BAR (SEPARATE TABS HEADER)
    ========================================================================== */
@@ -2360,6 +2349,16 @@ img, svg, canvas, video {
   gap: 22px;
   width: 100%;
   max-width: 100%;
+}
+
+.ai-studio-grid.ai-studio-centered {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.ai-studio-centered .ai-studio-right {
+  width: 100%;
+  max-width: 680px;
 }
 
 .ai-brief-pills {

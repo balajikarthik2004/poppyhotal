@@ -13,22 +13,21 @@ import OccupancyForecast from './components/OccupancyForecast';
 import BranchMap from './components/BranchMap';
 import AiHotelAnalyst from './components/AiHotelAnalyst';
 import { api } from './services/api';
-import { 
-  Info, 
-  Bell, 
-  X, 
-  AlertTriangle, 
-  TrendingDown, 
-  Check, 
-  Layers, 
-  Building2, 
-  BedDouble, 
-  CalendarCheck2, 
-  Utensils, 
-  Users, 
-  BadgeIndianRupee, 
-  Star, 
-  Sparkles, 
+import {
+  Info,
+  Bell,
+  X,
+  AlertTriangle,
+  TrendingDown,
+  Check,
+  Layers,
+  Building2,
+  BedDouble,
+  CalendarCheck2,
+  Utensils,
+  Users,
+  BadgeIndianRupee,
+  Star,
   BellRing,
   ArrowRight
 } from 'lucide-react';
@@ -172,14 +171,16 @@ export default function App() {
 
       {/* MAIN CONTENT AREA */}
       <main className="main-content" id="main-content">
-        {/* TOP HEADER */}
-        <Header
-          activeTab={activeTab}
-          selectedBranch={selectedBranch}
-          onBranchChange={handleBranchSelect}
-          onToggleNotif={() => setIsNotifDrawerOpen(!isNotifDrawerOpen)}
-          onShowToast={showToast}
-        />
+        {/* TOP HEADER — only on Overview, Branch Analytics & Alerts */}
+        {['overview', 'branches', 'alerts'].includes(activeTab) && (
+          <Header
+            activeTab={activeTab}
+            selectedBranch={selectedBranch}
+            onBranchChange={handleBranchSelect}
+            onToggleNotif={() => setIsNotifDrawerOpen(!isNotifDrawerOpen)}
+            onShowToast={showToast}
+          />
+        )}
 
         {/* TAB NAVIGATION HEADER BAR */}
         <div className="tab-context-bar">
@@ -314,36 +315,7 @@ export default function App() {
           {/* TAB 9: AI ANALYST (FULL STUDIO) */}
           {activeTab === 'ai-analyst' && (
             <div className="tab-fade-container ai-full-studio">
-              <div className="ai-studio-grid">
-                <div className="ai-studio-left">
-                  <div className="content-card neon-card">
-                    <h3 className="card-title">
-                      <Sparkles size={18} style={{ color: '#B83232' }} /> AI Intelligence Overview
-                    </h3>
-                    <p className="card-subtitle">Synthesizing live operational parameters across 8 Poppys branches</p>
-                    
-                    <div className="ai-brief-pills">
-                      <div className="brief-mini-pill">
-                        <span>Group Occupancy Pace</span>
-                        <strong>78.4% (Optimal)</strong>
-                      </div>
-                      <div className="brief-mini-pill">
-                        <span>Weekly Revenue Runrate</span>
-                        <strong style={{ color: '#10b981' }}>₹48.6L (+13.5%)</strong>
-                      </div>
-                      <div className="brief-mini-pill">
-                        <span>Active Anomalies</span>
-                        <strong style={{ color: '#ef4444' }}>2 Needs Attention</strong>
-                      </div>
-                    </div>
-
-                    <OccupancyForecast 
-                      forecastData={forecastData}
-                      onApplyPricing={handleApplyPricing}
-                    />
-                  </div>
-                </div>
-
+              <div className="ai-studio-grid ai-studio-centered">
                 <div className="ai-studio-right">
                   <AiHotelAnalyst />
                 </div>

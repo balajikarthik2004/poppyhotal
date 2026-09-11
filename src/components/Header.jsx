@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bell, Database } from 'lucide-react';
+import { Bell } from 'lucide-react';
 
 export default function Header({
   activeTab,
@@ -143,11 +143,6 @@ export default function Header({
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="header-mock-ribbon">
-        <Database size={13} style={{ color: '#f59e0b' }} />
-        <span>Poppys Hotels Live Operations Sandbox &bull; Demo / Mock Data Active</span>
       </div>
     </header>
   );
