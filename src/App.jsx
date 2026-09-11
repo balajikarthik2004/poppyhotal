@@ -173,7 +173,8 @@ export default function App() {
       {/* MAIN CONTENT AREA */}
       <main className="main-content" id="main-content">
         {/* TOP HEADER */}
-        <Header 
+        <Header
+          activeTab={activeTab}
           selectedBranch={selectedBranch}
           onBranchChange={handleBranchSelect}
           onToggleNotif={() => setIsNotifDrawerOpen(!isNotifDrawerOpen)}

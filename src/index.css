@@ -16,7 +16,7 @@
   /* Brand Core Colors (deep indigo, replaces the old placeholder navy) */
   --navy-darkest: #191552;
   --navy-dark: #29246A;
-  --navy-sidebar: #241f5e;
+  --navy-sidebar: #B22222;
   --navy-light: #3d3690;
   --navy-muted: #5b5499;
 
@@ -100,6 +100,10 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+img, svg, canvas, video {
+  max-width: 100%;
+}
+
 /* ==========================================================================
    CUSTOM SLEEK SCROLLBARS (ZERO BROWSER DEFAULT)
    ========================================================================== */
@@ -167,36 +171,46 @@ html, body {
   min-width: 260px;
   max-width: 260px;
   background-color: var(--navy-sidebar);
-  color: #e2e8f0;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
   position: sticky;
   top: 0;
   height: 100vh;
   z-index: 50;
   box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .sidebar-header {
   padding: 22px 20px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .sidebar-nav {
   flex: 1;
   padding: 16px 12px;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .nav-group-title {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.6);
   padding: 14px 12px 6px;
   text-transform: uppercase;
 }
@@ -207,33 +221,37 @@ html, body {
   gap: 12px;
   padding: 10px 14px;
   border-radius: var(--radius-md);
-  color: #94a3b8;
+  color: #ffffff;
   font-size: 0.92rem;
   font-weight: 500;
   transition: all var(--transition-fast);
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   width: 100%;
   text-align: left;
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
 
 .nav-item.active {
-  background: linear-gradient(90deg, rgba(184, 50, 50, 0.22) 0%, rgba(184, 50, 50, 0.05) 100%);
-  color: #ff9d9d;
-  font-weight: 600;
-  border-left: 3.5px solid var(--brand-red-light);
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-weight: 700;
+  border: 1px solid #ffffff;
 }
 
 .ai-nav-item {
-  background: rgba(184, 50, 50, 0.12);
-  border: 1px solid rgba(184, 50, 50, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid transparent;
   margin-top: 4px;
+}
+
+.ai-nav-item.active {
+  border: 1px solid #ffffff;
 }
 
 .ai-sparkle-pill {
@@ -242,15 +260,15 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ff9d9d;
+  color: #ffffff;
 }
 
 .badge-pulse {
   margin-left: auto;
   font-size: 0.65rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--brand-red-light), var(--brand-red));
-  color: #ffffff;
+  background: #ffffff;
+  color: var(--brand-red);
   padding: 2px 7px;
   border-radius: var(--radius-full);
   text-transform: uppercase;
@@ -267,16 +285,16 @@ html, body {
   margin-left: auto;
   font-size: 0.7rem;
   font-weight: 700;
-  background: var(--rose-primary);
-  color: #ffffff;
+  background: #ffffff;
+  color: var(--brand-red);
   padding: 1px 7px;
   border-radius: var(--radius-full);
 }
 
 .sidebar-footer {
   padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .demo-tag-container {
@@ -291,8 +309,8 @@ html, body {
   gap: 5px;
   font-size: 0.7rem;
   font-weight: 600;
-  background: rgba(245, 158, 11, 0.18);
-  color: #fbbf24;
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
   padding: 3px 8px;
   border-radius: var(--radius-sm);
   width: fit-content;
@@ -301,13 +319,13 @@ html, body {
 .footer-title {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #cbd5e1;
+  color: #ffffff;
   margin-top: 4px;
 }
 
 .footer-sub {
   font-size: 0.7rem;
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.65);
 }
 
 /* ==========================================================================
@@ -403,6 +421,7 @@ html, body {
   align-items: center;
   gap: 14px;
   flex-wrap: wrap;
+  margin-left: auto;
 }
 
 .filter-group {
@@ -1119,10 +1138,11 @@ html, body {
    ========================================================================== */
 .analytics-layout-grid {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: minmax(0, 1fr) 380px;
   gap: 22px;
   align-items: start;
   width: 100%;
+  max-width: 100%;
 }
 
 @media (max-width: 1440px) {
@@ -1162,6 +1182,8 @@ html, body {
   align-items: flex-start;
   justify-content: space-between;
   gap: 14px;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .card-title {
@@ -1291,9 +1313,10 @@ html, body {
    ========================================================================== */
 .charts-dual-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 20px;
   width: 100%;
+  max-width: 100%;
 }
 
 @media (max-width: 1024px) {
@@ -1396,19 +1419,64 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .cat-name {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
   font-family: var(--font-heading);
   font-size: 0.96rem;
   font-weight: 700;
   color: var(--text-main);
+  min-width: 0;
+}
+
+.badge-star {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #059669;
+  background: #d1fae5;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.cat-rooms {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .cat-occ {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 8px;
   font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+.cat-occ-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat-count {
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .cat-progress {
@@ -1423,12 +1491,66 @@ html, body {
   background: #3b82f6;
 }
 
+.cat-progress-fill.success-fill {
+  background: #10b981;
+}
+
+.cat-progress-fill.warn-fill {
+  background: #f59e0b;
+}
+
 .cat-meta-row {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   margin-top: 4px;
   padding-top: 8px;
   border-top: 1px solid #f1f5f9;
+}
+
+.cat-meta-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cat-meta-row > div:last-child {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.meta-label {
+  font-size: 0.66rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.meta-value {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.highlight-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  color: #854d0e;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
+.highlight-pill strong {
+  font-weight: 800;
 }
 
 /* ==========================================================================
@@ -1621,11 +1743,58 @@ html, body {
 /* ==========================================================================
    OCCUPANCY FORECAST
    ========================================================================== */
+.title-with-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ai-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--brand-indigo);
+  background: rgba(41, 36, 106, 0.08);
+  border: 1px solid rgba(41, 36, 106, 0.2);
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.mock-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: #f1f5f9;
+  border: 1px solid var(--border-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.forecast-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+}
 .forecast-cards-row {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 10px;
   width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .forecast-cards-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .forecast-day-card {
@@ -1638,11 +1807,28 @@ html, body {
   flex-direction: column;
   gap: 4px;
   position: relative;
+  min-width: 0;
 }
 
 .forecast-day-card.peak-forecast {
   background: #ecfdf5;
   border-color: #6ee7b7;
+}
+
+.day-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.day-status {
+  font-size: 0.66rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.3;
+  overflow-wrap: break-word;
 }
 
 .peak-tag {
@@ -1677,7 +1863,9 @@ html, body {
   padding: 12px 16px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 14px;
+  max-width: 100%;
 }
 
 .rec-icon-box {
@@ -1724,10 +1912,11 @@ html, body {
    ========================================================================== */
 .map-layout-wrapper {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: minmax(0, 1fr) 280px;
   gap: 18px;
   align-items: center;
   width: 100%;
+  max-width: 100%;
 }
 
 .svg-map-container {
@@ -2167,8 +2356,10 @@ html, body {
 /* AI Full Studio */
 .ai-studio-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
   gap: 22px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .ai-brief-pills {

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Bell, Database } from 'lucide-react';
 
-export default function Header({ 
-  selectedBranch, 
-  onBranchChange, 
-  onToggleNotif, 
-  onShowToast 
+export default function Header({
+  activeTab,
+  selectedBranch,
+  onBranchChange,
+  onToggleNotif,
+  onShowToast
 }) {
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -18,13 +19,15 @@ export default function Header({
     <header className="top-header">
       <div className="header-overlay"></div>
       <div className="header-inner">
-        <div className="header-welcome">
-          <div className="welcome-chip">
-            <span className="status-indicator"></span> Live Group Operations
+        {activeTab === 'overview' && (
+          <div className="header-welcome">
+            <div className="welcome-chip">
+              <span className="status-indicator"></span> Live Group Operations
+            </div>
+            <h1>{getGreeting()}, Mr. Vicky! <span className="wave-emoji">👋</span></h1>
+            <p className="header-subtitle">Here's your hotel performance overview across all branches.</p>
           </div>
-          <h1>{getGreeting()}, Mr. Vicky! <span className="wave-emoji">👋</span></h1>
-          <p className="header-subtitle">Here's your hotel performance overview across all branches.</p>
-        </div>
+        )}
 
         <div className="header-controls">
           <div className="filter-group">

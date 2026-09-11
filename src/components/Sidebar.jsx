@@ -1,16 +1,15 @@
 import React from 'react';
-import { 
-  LayoutDashboard, 
-  Building2, 
-  BedDouble, 
-  CalendarCheck2, 
-  Utensils, 
-  Users, 
-  BadgeIndianRupee, 
-  Star, 
-  Sparkles, 
-  BellRing, 
-  Info 
+import {
+  LayoutDashboard,
+  Building2,
+  BedDouble,
+  CalendarCheck2,
+  Utensils,
+  Users,
+  BadgeIndianRupee,
+  Star,
+  Sparkles,
+  BellRing
 } from 'lucide-react';
 import PoppysLogo from './PoppysLogo';
 
@@ -70,16 +69,6 @@ export default function Sidebar({ activeTab, setActiveTab }) {
           <span className="badge-count">3</span>
         </button>
       </nav>
-
-      <div className="sidebar-footer">
-        <div className="demo-tag-container">
-          <span className="mock-badge">
-            <Info size={12} /> Mock / Demo Data
-          </span>
-          <p className="footer-title">Hotel Management Dashboard</p>
-          <span className="footer-sub">v2.5 MERN Enterprise Edition</span>
-        </div>
-      </div>
     </aside>
   );
 }
