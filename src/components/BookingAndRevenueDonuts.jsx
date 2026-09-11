@@ -1,6 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Chart } from 'chart.js/auto';
 import { BadgePercent } from 'lucide-react';
+
+function centerTextPlugin(mainText, subText) {
+  return {
+    id: 'centerText',
+    afterDraw(chart) {
+      const { ctx, chartArea } = chart;
+      if (!chartArea) return;
+      const { width, height, left, top } = chartArea;
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
+      ctx.save();
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = "700 17px 'Montserrat', sans-serif";
+      ctx.fillStyle = '#333333';
+      ctx.fillText(mainText, centerX, centerY - 8);
+      ctx.font = "600 9.5px 'Montserrat', sans-serif";
+      ctx.fillStyle = '#8a8a8a';
+      ctx.fillText(subText, centerX, centerY + 10);
+      ctx.restore();
+    }
+  };
+}
 
 export default function BookingAndRevenueDonuts({ bookingData, revenueData }) {
   const bookingCanvasRef = useRef(null);
@@ -10,6 +33,29 @@ export default function BookingAndRevenueDonuts({ bookingData, revenueData }) {
   const bookingChartInst = useRef(null);
   const paceChartInst = useRef(null);
   const revenueChartInst = useRef(null);
+
+  const [hiddenBooking, setHiddenBooking] = useState(() => new Set());
+  const [hiddenRevenue, setHiddenRevenue] = useState(() => new Set());
+
+  const highlightSegment = (chartRef, index) => {
+    const chart = chartRef.current;
+    if (!chart) return;
+    chart.setActiveElements(index === null ? [] : [{ datasetIndex: 0, index }]);
+    chart.update();
+  };
+
+  const toggleSegment = (chartRef, index, hiddenSet, setHiddenSet) => {
+    const chart = chartRef.current;
+    if (!chart) return;
+    chart.toggleDataVisibility(index);
+    chart.update();
+    setHiddenSet((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  };
 
   // 1. Booking Channels Donut
   useEffect(() => {
@@ -29,13 +75,14 @@ export default function BookingAndRevenueDonuts({ bookingData, revenueData }) {
           backgroundColor: bgColors,
           borderWidth: 3,
           borderColor: '#ffffff',
-          hoverOffset: 4
+          hoverOffset: 10
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         cutout: '72%',
+        animation: { animateScale: true, duration: 800, easing: 'easeOutQuart' },
         plugins: {
           legend: { display: false },
           tooltip: {
@@ -44,7 +91,8 @@ export default function BookingAndRevenueDonuts({ bookingData, revenueData }) {
             }
           }
         }
-      }
+      },
+      plugins: [centerTextPlugin(bookingData.totalBookings?.toLocaleString('en-IN') || '', 'Total Bookings')]
     });
 
     return () => {
@@ -112,13 +160,14 @@ export default function BookingAndRevenueDonuts({ bookingData, revenueData }) {
           backgroundColor: bgColors,
           borderWidth: 3,
           borderColor: '#ffffff',
-          hoverOffset: 4
+          hoverOffset: 10
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         cutout: '72%',
+        animation: { animateScale: true, duration: 800, easing: 'easeOutQuart' },
         plugins: {
           legend: { display: false },
           tooltip: {
@@ -127,7 +176,8 @@ export default function BookingAndRevenueDonuts({ bookingData, revenueData }) {
             }
           }
         }
-      }
+      },
+      plugins: [centerTextPlugin(`₹${revenueData.totalRevenueLakhs}L`, 'Total Revenue')]
     });
 
     return () => {
@@ -152,8 +202,14 @@ export default function BookingAndRevenueDonuts({ bookingData, revenueData }) {
             <canvas ref={bookingCanvasRef}></canvas>
           </div>
           <div className="channel-breakdown-list">
-            {bookingData?.types?.map((item) => (
-              <div key={item.channel} className="channel-item">
+            {bookingData?.types?.map((item, index) => (
+              <div
+                key={item.channel}
+                className={`channel-item ${hiddenBooking.has(index) ? 'is-hidden' : ''}`}
+                onMouseEnter={() => highlightSegment(bookingChartInst, index)}
+                onMouseLeave={() => highlightSegment(bookingChartInst, null)}
+                onClick={() => toggleSegment(bookingChartInst, index, hiddenBooking, setHiddenBooking)}
+              >
                 <span className="ch-color" style={{ backgroundColor: item.color }}></span>
                 <span className="ch-name">{item.channel}</span>
                 <span className="ch-pct">{item.percent}%</span>
@@ -189,8 +245,14 @@ export default function BookingAndRevenueDonuts({ bookingData, revenueData }) {
             <canvas ref={revenueCanvasRef}></canvas>
           </div>
           <div className="channel-breakdown-list">
-            {revenueData?.streams?.map((item) => (
-              <div key={item.stream} className="channel-item">
+            {revenueData?.streams?.map((item, index) => (
+              <div
+                key={item.stream}
+                className={`channel-item ${hiddenRevenue.has(index) ? 'is-hidden' : ''}`}
+                onMouseEnter={() => highlightSegment(revenueChartInst, index)}
+                onMouseLeave={() => highlightSegment(revenueChartInst, null)}
+                onClick={() => toggleSegment(revenueChartInst, index, hiddenRevenue, setHiddenRevenue)}
+              >
                 <span className="ch-color" style={{ backgroundColor: item.color }}></span>
                 <span className="ch-name">{item.stream}</span>
                 <span className="ch-pct">{item.percent}%</span>

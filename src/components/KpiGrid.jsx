@@ -22,7 +22,7 @@ export default function KpiGrid({ kpiData }) {
         <div className="kpi-card-header">
           <span className="kpi-title">Total Branches</span>
           <div className="kpi-icon-pill accent-blue">
-            <Building size={17} />
+            <Building size={14} />
           </div>
         </div>
         <div className="kpi-value-row">
@@ -40,7 +40,7 @@ export default function KpiGrid({ kpiData }) {
         <div className="kpi-card-header">
           <span className="kpi-title">Total Rooms</span>
           <div className="kpi-icon-pill accent-teal">
-            <Bed size={17} />
+            <Bed size={14} />
           </div>
         </div>
         <div className="kpi-value-row">
@@ -58,13 +58,13 @@ export default function KpiGrid({ kpiData }) {
         <div className="kpi-card-header">
           <span className="kpi-title">Occupancy Rate</span>
           <div className="kpi-icon-pill accent-emerald">
-            <PieChart size={17} />
+            <PieChart size={14} />
           </div>
         </div>
         <div className="kpi-value-row">
           <span className="kpi-number">{kpiData.occupancyRate}%</span>
           <span className="trend-badge positive">
-            <TrendingUp size={12} /> {kpiData.occupancyGrowth}%
+            <TrendingUp size={10} /> {kpiData.occupancyGrowth}%
           </span>
         </div>
         <div className="kpi-footer">
@@ -78,13 +78,13 @@ export default function KpiGrid({ kpiData }) {
         <div className="kpi-card-header">
           <span className="kpi-title">Total Revenue</span>
           <div className="kpi-icon-pill accent-gold">
-            <BadgeIndianRupee size={17} />
+            <BadgeIndianRupee size={14} />
           </div>
         </div>
         <div className="kpi-value-row">
           <span className="kpi-number">₹{kpiData.revenueLakhs}L</span>
           <span className="trend-badge positive">
-            <TrendingUp size={12} /> {kpiData.revenueGrowth}%
+            <TrendingUp size={10} /> {kpiData.revenueGrowth}%
           </span>
         </div>
         <div className="kpi-footer">
@@ -98,13 +98,13 @@ export default function KpiGrid({ kpiData }) {
         <div className="kpi-card-header">
           <span className="kpi-title">Bookings</span>
           <div className="kpi-icon-pill accent-violet">
-            <CalendarCheck size={17} />
+            <CalendarCheck size={14} />
           </div>
         </div>
         <div className="kpi-value-row">
           <span className="kpi-number">{kpiData.bookingsCount?.toLocaleString()}</span>
           <span className="trend-badge positive">
-            <TrendingUp size={12} /> {kpiData.bookingsGrowth}%
+            <TrendingUp size={10} /> {kpiData.bookingsGrowth}%
           </span>
         </div>
         <div className="kpi-footer">
@@ -118,13 +118,13 @@ export default function KpiGrid({ kpiData }) {
         <div className="kpi-card-header">
           <span className="kpi-title">Food Orders</span>
           <div className="kpi-icon-pill accent-coral">
-            <Coffee size={17} />
+            <Coffee size={14} />
           </div>
         </div>
         <div className="kpi-value-row">
           <span className="kpi-number">{kpiData.foodOrdersCount?.toLocaleString()}</span>
           <span className="trend-badge positive">
-            <TrendingUp size={12} /> {kpiData.foodGrowth}%
+            <TrendingUp size={10} /> {kpiData.foodGrowth}%
           </span>
         </div>
         <div className="kpi-footer">
@@ -138,13 +138,13 @@ export default function KpiGrid({ kpiData }) {
         <div className="kpi-card-header">
           <span className="kpi-title">Staff On Duty</span>
           <div className="kpi-icon-pill accent-cyan">
-            <UserCheck size={17} />
+            <UserCheck size={14} />
           </div>
         </div>
         <div className="kpi-value-row">
           <span className="kpi-number">{kpiData.staffCount}</span>
           <span className="trend-badge neutral-badge">
-            <TrendingUp size={12} /> {kpiData.staffGrowth}%
+            <TrendingUp size={10} /> {kpiData.staffGrowth}%
           </span>
         </div>
         <div className="kpi-footer">
@@ -158,13 +158,13 @@ export default function KpiGrid({ kpiData }) {
         <div className="kpi-card-header">
           <span className="kpi-title">Guest Rating</span>
           <div className="kpi-icon-pill accent-rose">
-            <Star size={17} />
+            <Star size={14} />
           </div>
         </div>
         <div className="kpi-value-row">
           <span className="kpi-number">{kpiData.guestRating} <span className="max-denom">/ 5</span></span>
           <span className="trend-badge positive">
-            <TrendingUp size={12} /> {kpiData.ratingGrowth}%
+            <TrendingUp size={10} /> {kpiData.ratingGrowth}%
           </span>
         </div>
         <div className="kpi-footer">

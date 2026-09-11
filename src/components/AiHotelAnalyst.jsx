@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, Sparkles, Zap, ArrowUpRight, TrendingUp, CheckCircle2, AlertTriangle, Lightbulb, User } from 'lucide-react';
+import { Bot, Sparkles, Zap, ArrowUpRight, TrendingUp, CheckCircle2, AlertTriangle, Lightbulb, User, Minus, X } from 'lucide-react';
 import { api } from '../services/api';
 import { getWelcomeBrief } from '../data/aiKnowledgeBase';
 
-export default function AiHotelAnalyst() {
+export default function AiHotelAnalyst({ onMinimize, onClose }) {
   const [messages, setMessages] = useState([
     {
       id: 'init-1',
@@ -93,7 +93,7 @@ export default function AiHotelAnalyst() {
   };
 
   return (
-    <div className="ai-column" id="ai-analyst">
+    <div className="ai-column">
       <div className="ai-agent-card">
         {/* Card Header */}
         <div className="ai-card-header">
@@ -109,9 +109,24 @@ export default function AiHotelAnalyst() {
               <span className="ai-role-text">Poppys Hospitality Intelligence v2.4</span>
             </div>
           </div>
-          <div className="ai-status-chip">
-            <Sparkles size={11} /> Active
-          </div>
+          {onMinimize || onClose ? (
+            <div className="ai-widget-header-actions">
+              {onMinimize && (
+                <button className="ai-widget-btn" onClick={onMinimize} title="Minimize" aria-label="Minimize">
+                  <Minus size={14} />
+                </button>
+              )}
+              {onClose && (
+                <button className="ai-widget-btn" onClick={onClose} title="Close" aria-label="Close">
+                  <X size={14} />
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="ai-status-chip">
+              <Sparkles size={11} /> Active
+            </div>
+          )}
         </div>
 
         {/* Chat Body */}

@@ -29,12 +29,15 @@ import {
   BadgeIndianRupee,
   Star,
   BellRing,
-  ArrowRight
+  ArrowRight,
+  Sparkles
 } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedBranch, setSelectedBranch] = useState('all');
+  const [aiWidgetOpen, setAiWidgetOpen] = useState(false);
+  const [aiWidgetMinimized, setAiWidgetMinimized] = useState(false);
 
   // Dashboard Data State
   const [kpiData, setKpiData] = useState(null);
@@ -183,13 +186,14 @@ export default function App() {
         )}
 
         {/* TAB NAVIGATION HEADER BAR */}
-        <div className="tab-context-bar">
-          <div className="tab-context-title">
-            <span className="tab-badge">Active View</span>
-            <h2>{getTabTitle()}</h2>
+        {activeTab !== 'ai-analyst' && (
+          <div className="tab-context-bar">
+            <div className="tab-context-title">
+              <span className="tab-badge">Active View</span>
+              <h2>{getTabTitle()}</h2>
+            </div>
           </div>
-
-        </div>
+        )}
 
         {/* DASHBOARD TAB CONTAINER */}
         <div className="dashboard-scroll-body">
@@ -207,21 +211,17 @@ export default function App() {
                 onDismissAlert={handleDismissAlert}
               />
 
-              {/* Dual Column: Neon Charts & AI Assistant */}
-              <div className="analytics-layout-grid">
-                <div className="main-column">
-                  <ChartsDualGrid 
-                    branches={branches}
-                    occupancyTrend={occupancyTrend}
-                  />
+              {/* Performance Charts & Revenue Breakdown */}
+              <div className="main-column">
+                <ChartsDualGrid
+                  branches={branches}
+                  occupancyTrend={occupancyTrend}
+                />
 
-                  <BookingAndRevenueDonuts 
-                    bookingData={bookingData}
-                    revenueData={revenueData}
-                  />
-                </div>
-
-                <AiHotelAnalyst />
+                <BookingAndRevenueDonuts
+                  bookingData={bookingData}
+                  revenueData={revenueData}
+                />
               </div>
             </div>
           )}
@@ -411,6 +411,42 @@ export default function App() {
           </div>
         ))}
       </div>
+
+      {/* FLOATING AI ASSISTANT LAUNCHER & POPUP WIDGET */}
+      {!aiWidgetOpen && (
+        <button
+          className="ai-fab"
+          onClick={() => {
+            setAiWidgetOpen(true);
+            setAiWidgetMinimized(false);
+          }}
+          title="Ask the AI Hotel Analyst"
+        >
+          <Sparkles size={22} />
+        </button>
+      )}
+
+      {aiWidgetOpen && (
+        <div className={`ai-widget-panel ${aiWidgetMinimized ? 'minimized' : ''}`}>
+          {aiWidgetMinimized ? (
+            <button
+              className="ai-widget-minibar"
+              onClick={() => setAiWidgetMinimized(false)}
+            >
+              <Sparkles size={16} />
+              <span>AI Hotel Analyst</span>
+            </button>
+          ) : (
+            <AiHotelAnalyst
+              onMinimize={() => setAiWidgetMinimized(true)}
+              onClose={() => {
+                setAiWidgetOpen(false);
+                setAiWidgetMinimized(false);
+              }}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -326,7 +326,7 @@ const seedData = {
   revenueBreakdown: {
     totalRevenueLakhs: 48.6,
     streams: [
-      { stream: 'Rooms', percent: 64.2, amountLakhs: 31.2, color: '#0f172a' },
+      { stream: 'Rooms', percent: 64.2, amountLakhs: 31.2, color: '#A21B21' },
       { stream: 'Restaurant', percent: 19.3, amountLakhs: 9.4, color: '#f59e0b' },
       { stream: 'Events', percent: 8.4, amountLakhs: 4.1, color: '#0d9488' },
       { stream: 'Other Services', percent: 8.0, amountLakhs: 3.9, color: '#94a3b8' }
